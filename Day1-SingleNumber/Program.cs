@@ -6,7 +6,7 @@ namespace Day1_SingleNumber
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Change Text!");
         }
     }
 }
