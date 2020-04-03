@@ -7,38 +7,29 @@ namespace Day3_Maximum_Subarray
 {
     public class Solution
     {
+        // still processing how coder came up with this solution but works really well
+        // reference: https://leetcode.com/problems/maximum-subarray/discuss/20461/Accepted-C-solution
 
         public int MaxSubArray(int[] nums)
         {
-            int sum;
-            int highest = int.MinValue;
+            int sum = -1;
+            int highest = nums[0];
 
-            for (int i=0; i < nums.Length; i++)
+            foreach (int num in nums)
             {
-                sum = nums[i];
-                
-                highest = getHighest(sum, highest);
-
-                for (int j=i+1; j < nums.Length; j++)
+                if (sum < 0)
                 {
-                    sum += nums[j];
-                    highest = getHighest(sum, highest);
-                }
+                    sum = num;
 
+                }
+                else
+                {
+                    sum += num;
+                }
+                highest = Math.Max(highest, sum);
             }
 
             return highest;
-        }
-
-        int getHighest(int n, int m)
-        {
-            if (n > m)
-            {
-                return n;
-            }  else
-            {
-                return m;
-            }
         }
     }
 }
