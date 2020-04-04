@@ -7,9 +7,9 @@ namespace Day3_MoveZeros
         static void Main(string[] args)
         {
             Solution s = new Solution();
-            //int[] nums = new int[]{0,1,0,3,12};
+            int[] nums = new int[]{0,1,0,3,12};
             //int[] nums = new int[]{0};
-            int[] nums = new int[]{0,1};
+            //nt[] nums = new int[]{0,1};
             s.MoveZeroes(nums);
 
             Console.WriteLine(String.Join(',',nums));

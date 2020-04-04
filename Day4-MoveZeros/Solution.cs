@@ -10,24 +10,22 @@ namespace Day3_MoveZeros
     {
         public void MoveZeroes(int[] nums)
         {
+            int nonzero = 0;
+            int zero = 0;
 
-            int zerocount = 0 ;
-
-            for (int i = 0; i < nums.Length - zerocount; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i] == 0){
-                    //swap
-                    IntSwap(ref nums[i], ref nums[nums.Length - zerocount - 1]);
-                    zerocount++;
+                if (nums[i] != 0){
+                    nums[nonzero] = nums[i];
+                    nonzero++;
+                } else {
+                    zero++;
                 }
-
             }
-        }
-
-        private void IntSwap(ref int a, ref int b){
-            int temp = a;
-            a = b;
-            b = temp;
+            //append zeros to end
+            for (int i = 0; i < zero; i++){
+                nums[nums.Length-1-i] = 0;
+            }
         }
     }
 
