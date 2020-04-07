@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Day7_CountingElements
 {
@@ -10,6 +12,7 @@ namespace Day7_CountingElements
         {
             Console.WriteLine("Give an array to test:");
             String str = Console.ReadLine();
+            str = Regex.Replace(str, @"(\[|""|\])", "");
             int[] nums = str.Split(',').Select(int.Parse).ToArray();
 
             Solution s = new Solution();

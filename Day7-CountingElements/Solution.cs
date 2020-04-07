@@ -10,34 +10,27 @@ namespace Day7_CountingElements
         public int CountElements(int[] arr)
         {
             Array.Sort(arr);
-            Dictionary<int, int> impact = new Dictionary<int, int>();
-            foreach (int num in arr)
-            {
-                if (impact.ContainsKey(num))
-                {
-                    impact[num] += 1;
-                } else
-                {
-                    impact.Add(num, 1);
-                }
-            }
+  
             int count = 0;
-
-            int[] uniquearr = arr.Distinct().ToArray();
-
-            for (int i = 0; i < uniquearr.Length - 1; i++)
+            int impact = 0;
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                if (uniquearr[i] == (uniquearr[i+1] - 1))
+                if (arr[i] == (arr[i+1] - 1))
                 {
-                    if (impact[(uniquearr[i])] == impact[(uniquearr[i + 1])])
-                    {
-                        count += impact[(uniquearr[i])];
-                    }
-                    else
-                    {
-                        count++;
-                    }
+                    count += 1 + impact;
+                    impact = 0;
+                
                 }
+                else if (arr[i] == arr[i + 1])
+                {
+                    impact++;
+                } 
+                else
+                {
+                    //reset impact if it is not the same, or greater-by 1
+                    impact = 0;
+                }
+
             }
             return count;
         }
