@@ -9,19 +9,13 @@ namespace Day12_LastStoneWeight
     {
         public int LastStoneWeight(int[] stones)
         {
-            //special case for stones = 1
-            if (stones.Length == 1)
-            {
-                return stones[0];
-            }
 
-            List<int> stoneList = stones.OfType<int>().ToList();
+            List<int> stoneList = stones.ToList();
 
-            do
+            while (stoneList.Count > 1)
             {
                 SmashStones(stoneList);
             }
-            while (stoneList.Count > 1);
 
             // if stones are empty, return 0 otherwise return the remainder number
             if (stoneList.Count == 0)
@@ -41,16 +35,12 @@ namespace Day12_LastStoneWeight
             int largest = sortedStones[sortedStones.Count - 1];
             int second = sortedStones[sortedStones.Count - 2];
 
-            if (second == largest)
+            stones.Remove(second);
+            stones.Remove(largest);
+
+            if (second != largest)
             {
-                stones.Remove(second);
-                stones.Remove(largest);
-            }
-            else
-            {
-                stones.Remove(second);
-                int largeindex = stones.IndexOf(largest);
-                stones[largeindex] = largest - second;
+                stones.Add(largest - second);
             }
 
         }
