@@ -9,42 +9,31 @@ namespace Day13_ContiguousArray
 {
 
     //Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
+    // solution help from : https://leetcode.com/problems/contiguous-array/discuss/99691/C-single-pass-O(n)-space
 
     public class Solution
     {
         public int FindMaxLength(int[] nums)
         {
-            List<int> intList = nums.ToList();
-
-            int counter = 0;
-
-            int maxvalue = 0;
-            
-            for (int i =0; i < intList.Count - 1; i++)
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            int max = 0;
+            int sum = 0;
+            dict[0] = -1;
+            for (int i = 0; i < nums.Length; i++)
             {
-                for (int j = i; j < intList.Count; j++)
+                sum += nums[i] == 0 ? -1 : 1;
+                if (dict.ContainsKey(sum))
                 {
-                    if (intList[j] == 0)
-                    {
-                        counter--;
-                    }
-                    else
-                    {
-                        counter++;
-                    }
-
-                    if (counter == 0)
-                    {
-                        maxvalue = Math.Max(maxvalue, j - i + 1);
-                    }
+                    max = Math.Max(max, i - dict[sum]);
                 }
-
-                counter = 0;
-                  
-
+                else
+                {
+                    dict[sum] = i;
+                }
             }
 
-            return maxvalue;
+            return max;
         }
     }
-}
+    }
+
