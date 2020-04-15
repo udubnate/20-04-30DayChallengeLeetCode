@@ -7,20 +7,31 @@ namespace Day15_ProductofArrayExceptSelf
 {
     class Solution
     {
+
+        // sourced from: https://leetcode.com/problems/product-of-array-except-self/discuss/118532/C-Solution after my own attempt didn't work
+
         public int[] ProductExceptSelf(int[] nums)
         {
-            List<int> outList = new List<int>();
-            
+            if (nums == null || nums.Length == 0)
+                return null;
+
+            int[] result = new int[nums.Length];
+            int temp = 1;
+
             for (int i = 0; i < nums.Length; i++)
             {
-                List<int> tempArray = new List<int>();
-                tempArray = nums.ToList<int>();
-                tempArray.RemoveAt(i);
-
-                var product = tempArray.Aggregate((total, next) => total * next);
-                outList.Add(product);
+                result[i] = temp;
+                temp *= nums[i];
             }
-            return outList.ToArray();
+
+            temp = 1;
+            for (int i = result.Length - 1; i >= 0; i--)
+            {
+                result[i] *= temp;
+                temp *= nums[i];
+            }
+
+            return result;
         }
     }
 }
