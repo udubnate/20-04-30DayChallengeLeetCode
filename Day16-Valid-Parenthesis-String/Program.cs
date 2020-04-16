@@ -20,6 +20,7 @@ namespace Day16_Valid_Parenthesis_String
             //negative tests
             AddTest("(()");
             AddTest("");
+            AddTest(")(");
 
 
             foreach (KeyValuePair<string,bool> kvp in testCases)
