@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
-namespace Day17_NumberOfIslands
+namespace Day18_Minimum_Path_Sum
 {
     class Program
     {
