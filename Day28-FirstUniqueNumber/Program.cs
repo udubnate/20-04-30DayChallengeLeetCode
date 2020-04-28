@@ -25,40 +25,43 @@ namespace Day28_FirstUniqueNumber
     public class FirstUnique
     {
 
-        List<int> _list;
+        Queue<int> _queue;
         Dictionary<int, int> _dict;
 
         public FirstUnique(int[] nums)
         {
-           _list = nums.ToList<int>();
-            _dict = new Dictionary<int, int>();
 
-            for (int i = 0; i < _list.Count; i++)
+            _dict = new Dictionary<int, int>();
+            _queue = new Queue<int>();
+
+            for (int i = 0; i < nums.Length; i++)
             {
-                this.AddHash(_list[i]);
+                if (_dict.ContainsKey(nums[i])){
+                    _dict[nums[i]] += 1;
+                } else
+                {
+                    _dict.Add(nums[i], 1);
+                }
+                _queue.Enqueue(nums[i]);
+
             }
         }
 
         public int ShowFirstUnique()
         {
-            for (int i = 0; i < _list.Count; i++)
+           while (_queue.Count != 0 && _dict[_queue.Peek()] > 1)
             {
-                if (_dict[_list[i]] == 1)
-                {
-                    return _list[i];
-                }
+                _queue.Dequeue();
             }
-            return -1;
+           if (_queue.Count == 0)
+            {
+                return -1;
+            }
+            return _queue.Peek();
+            
         }
 
         public void Add(int value)
-        {
-            _list.Add(value);
-            AddHash(value);
-
-        }
-
-        private void AddHash(int value)
         {
             if (_dict.ContainsKey(value))
             {
@@ -68,6 +71,9 @@ namespace Day28_FirstUniqueNumber
             {
                 _dict.Add(value, 1);
             }
+            _queue.Enqueue(value);
         }
+
+     
     }
 }
